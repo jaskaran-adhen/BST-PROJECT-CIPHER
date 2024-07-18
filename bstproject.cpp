@@ -102,51 +102,51 @@ int main() {
     cout << "-------------Working on Binary Search Tree implementation-------------" << "\n                     Choose options to work on BST\n";
     while (true) {
         cout << "\n";
-        cout << "1. Insert\n2. Search\n3. Delete\n4. InOrder Traversal\n5. PreOrder Traversal\n6. PostOrder Traversal\n7. Exit\n";
-        cout << "Enter your choice: ";
+        cout << "\t\t1. Insert\n\t\t2. Search\n\t\t3. Delete\n\t\t4. InOrder Traversal\n\t\t5. PreOrder Traversal\n\t\t6. PostOrder Traversal\n\t\t7. Exit\n";
+        cout << "\tEnter your choice: ";
         cin >> choice;
 
         switch (choice) {
             case 1:
-                cout << "Enter value to insert: ";
+                cout << "\tEnter value to insert: ";
                 cin >> val;
                 rt = insert(rt, val);
                 break;
             case 2:
-                cout << "Enter value to search: ";
+                cout << "\tEnter value to search: ";
                 cin >> val;
                 if (search(rt, val))
-                    cout << "Value found.\n";
+                    cout << "\tValue found.\n";
                 else
-                    cout << "Value not found.\n";
+                    cout << "\tValue not found.\n";
                 break;
             case 3:
-                cout << "Enter value to delete: ";
+                cout << "\tEnter value to delete: ";
                 cin >> val;
                 if (deleteNode(rt, val))
-                    cout << "The value is deleted.\n";
+                    cout << "\tThe value is deleted.\n";
                 else
-                    cout << "Value not found to be deleted.\n";
+                    cout << "\tValue not found to be deleted.\n";
                 break;
             case 4:
-                cout << "InOrder Traversal: ";
+                cout << "\tInOrder Traversal: ";
                 inOrder(rt);
                 cout << endl;
                 break;
             case 5:
-                cout << "PreOrder Traversal: ";
+                cout << "\tPreOrder Traversal: ";
                 preOrder(rt);
                 cout << endl;
                 break;
             case 6:
-                cout << "PostOrder Traversal: ";
+                cout << "\tPostOrder Traversal: ";
                 postOrder(rt);
                 cout << endl;
                 break;
             case 7:
                 return 0;
             default:
-                cout << "Invalid choice.\n";
+                cout << "\n\t\tInvalid choice.........\n";
         }
     }
 }
