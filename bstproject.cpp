@@ -39,37 +39,37 @@ Node* search(Node* node, int val) {
 }
 
 // Find node with the minimum value in a subtree
-Node* minValnode(Node* node) {
+Node* minValNode(Node* node) {
     Node* current = node;
     while (current && current->left != nullptr) current = current->left;
     return current;
 }
 
 // Delete a node 
-Node* deleteNode(Node* node, int val) {
-    if (node == nullptr) return node;
+bool deleteNode(Node*& node, int val) {
+    if (node == nullptr) return false;
 
     if (val < node->val) {
-        node->left = deleteNode(node->left, val);
+        return deleteNode(node->left, val);
     } else if (val > node->val) {
-        node->right = deleteNode(node->right, val);
+        return deleteNode(node->right, val);
     } else {
         // Handle node with one or no child
         if (node->left == nullptr) {
             Node* temp = node->right;
             delete node;
-            return temp;
+            node = temp;
+            return true;
         } else if (node->right == nullptr) {
             Node* temp = node->left;
             delete node;
-            return temp;
+            node = temp;
+            return true;
         }
-        Node* temp = minValnode(node->right);
+        Node* temp = minValNode(node->right);
         node->val = temp->val;
-        // Remove the in-order successor
-        node->right = deleteNode(node->right, temp->val);
+        return deleteNode(node->right, temp->val);
     }
-    return node;
 }
 
 //  in-order traversal
@@ -99,9 +99,9 @@ void postOrder(Node* node) {
 int main() {
     Node* rt = nullptr;
     int choice, val;
-    cout<<"-------------Working on Binary Search Tree implementation-------------"<<"\n                     Choose options to work on BST\n";
+    cout << "-------------Working on Binary Search Tree implementation-------------" << "\n                     Choose options to work on BST\n";
     while (true) {
-    cout<<"\n";
+        cout << "\n";
         cout << "1. Insert\n2. Search\n3. Delete\n4. InOrder Traversal\n5. PreOrder Traversal\n6. PostOrder Traversal\n7. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -123,8 +123,10 @@ int main() {
             case 3:
                 cout << "Enter value to delete: ";
                 cin >> val;
-                rt = deleteNode(rt, val);
-                cout << "The value is deleted.\n";
+                if (deleteNode(rt, val))
+                    cout << "The value is deleted.\n";
+                else
+                    cout << "Value not found to be deleted.\n";
                 break;
             case 4:
                 cout << "InOrder Traversal: ";
